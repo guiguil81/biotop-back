@@ -1,0 +1,69 @@
+{
+  "kind": "collectionType",
+  "collectionName": "games",
+  "info": {
+    "singularName": "game",
+    "pluralName": "games",
+    "displayName": "Game",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "ev": {
+      "type": "biginteger",
+      "default": "100"
+    },
+    "score": {
+      "type": "biginteger",
+      "default": "0"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "games"
+    },
+    "round": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::round.round",
+      "inversedBy": "games"
+    },
+    "planetName": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "planetWatter": {
+      "type": "integer",
+      "default": 100,
+      "max": 100,
+      "min": 0
+    },
+    "planetGround": {
+      "type": "integer",
+      "default": 0,
+      "max": 100,
+      "min": 0
+    },
+    "element": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::element.element"
+    },
+    "gameHaveSpecies": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::game-have-specie.game-have-specie",
+      "mappedBy": "game"
+    },
+    "era": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::era.era"
+    }
+  }
+}

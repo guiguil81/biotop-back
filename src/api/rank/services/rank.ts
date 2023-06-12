@@ -1,0 +1,5 @@
+/**
+ * generator service
+ */
+
+export default () => ({});

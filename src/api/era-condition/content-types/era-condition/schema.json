@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "era_conditions",
+  "info": {
+    "singularName": "era-condition",
+    "pluralName": "era-conditions",
+    "displayName": "EraCondition"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "qtyNeeded": {
+      "type": "biginteger",
+      "required": true
+    },
+    "isGreaterThen": {
+      "type": "boolean",
+      "required": true
+    },
+    "species": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::specie.specie",
+      "inversedBy": "eraConditions"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rounds",
+  "info": {
+    "singularName": "round",
+    "pluralName": "rounds",
+    "displayName": "Round",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "isActive": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "end": {
+      "type": "datetime",
+      "required": true
+    },
+    "games": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::game.game",
+      "mappedBy": "round"
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}
