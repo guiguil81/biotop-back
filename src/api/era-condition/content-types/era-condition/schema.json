@@ -4,7 +4,8 @@
   "info": {
     "singularName": "era-condition",
     "pluralName": "era-conditions",
-    "displayName": "EraCondition"
+    "displayName": "EraCondition",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -19,10 +20,16 @@
       "type": "boolean",
       "required": true
     },
-    "species": {
+    "specie": {
       "type": "relation",
-      "relation": "manyToMany",
+      "relation": "manyToOne",
       "target": "api::specie.specie",
+      "inversedBy": "eraConditions"
+    },
+    "era": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::era.era",
       "inversedBy": "eraConditions"
     }
   }

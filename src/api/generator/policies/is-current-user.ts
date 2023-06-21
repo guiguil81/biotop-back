@@ -1,5 +1,3 @@
-export default (policyContext) => {
-  const isAuthenticated = !!policyContext.state.user;
-
-  return isAuthenticated
+export default policyContext => {
+  return !!policyContext.state.user;
 };

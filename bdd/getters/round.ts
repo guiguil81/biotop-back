@@ -1,9 +1,9 @@
 const getCurrentRound = async () => {
   return await strapi.db.query('api::round.round').findOne({
     where: {
-      isActive: true
+      isActive: true,
     },
-  })
-}
+  });
+};
 
-export default getCurrentRound
+export default getCurrentRound;

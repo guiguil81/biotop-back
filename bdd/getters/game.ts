@@ -4,11 +4,11 @@ const getCurrentGame = async (user, currentRound) => {
       $and: [
         {
           round: currentRound.id,
-          user: user.id
-        }
-      ]
+          user: user.id,
+        },
+      ],
     },
-  })
-}
+  });
+};
 
-export default getCurrentGame
+export default getCurrentGame;

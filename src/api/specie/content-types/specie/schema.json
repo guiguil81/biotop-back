@@ -51,12 +51,6 @@
       "target": "api::era.era",
       "inversedBy": "species"
     },
-    "eraConditions": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::era-condition.era-condition",
-      "mappedBy": "species"
-    },
     "groupSpecie": {
       "type": "relation",
       "relation": "manyToOne",
@@ -74,6 +68,12 @@
       "relation": "oneToMany",
       "target": "api::species-mutation.species-mutation",
       "mappedBy": "species"
+    },
+    "eraConditions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::era-condition.era-condition",
+      "mappedBy": "specie"
     }
   }
 }

@@ -5,9 +5,9 @@ const createGame = async (user, round) => {
       round: round.id,
       planetName: 'planet_' + user.username,
       element: 1,
-      era: 1
+      era: 1,
     },
-  })
-}
+  });
+};
 
-export default createGame
+export default createGame;

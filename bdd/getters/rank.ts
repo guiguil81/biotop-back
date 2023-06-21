@@ -1,15 +1,25 @@
-const getMyRank = async (round, user) => {
+const getRanksAndMyRank = async (round, user) => {
   const allCurrentGames = await strapi.db.query('api::game.game').findMany({
     where: {
       round: round.id,
     },
     populate: ['user'],
-    orderBy: { score: 'desc'}
-  })
+    orderBy: { score: 'desc' },
+  });
 
-  return allCurrentGames.findIndex(game => {
-    return game.user.id === user.id
-  }) + 1
-}
+  const ranks = [];
+  allCurrentGames.forEach(game => {
+    ranks.push(game);
+  });
+  const myRank =
+    allCurrentGames.findIndex(game => {
+      return game.user.id === user.id;
+    }) + 1;
 
-export default getMyRank
+  return {
+    ranks,
+    myRank,
+  };
+};
+
+export default getRanksAndMyRank;
