@@ -8,6 +8,24 @@ const getCurrentGames = async currentRound => {
         },
       ],
     },
+    populate: {
+      element: {
+        field: ['id'],
+      },
+      gameHaveSpecies: {
+        fields: ['qty'],
+        populate: {
+          specie: {
+            fields: ['id', 'reproduction', 'eat', 'product', 'dead'],
+            populate: {
+              element: {
+                field: ['id'],
+              },
+            },
+          },
+        },
+      },
+    },
   });
 };
 

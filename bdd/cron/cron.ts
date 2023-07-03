@@ -2,6 +2,7 @@
 import getCurrentRound from '../getters/round';
 import { returnError } from '../../config/error';
 import { getCurrentGames } from '../getters/game';
+import gameProcess from './gameProcess';
 
 export default module.exports = {
   '* * * * * *': async () => {
@@ -16,7 +17,7 @@ export default module.exports = {
     const currentGames = await getCurrentGames(currentRound);
 
     currentGames.forEach(game => {
-      console.log('game', game);
+      gameProcess(game);
     });
   },
 };
