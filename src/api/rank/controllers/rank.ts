@@ -22,6 +22,7 @@ export default {
         return null;
       }
 
+      console.log('la ?');
       const { myRank, ranks } = await getRanksAndMyRank(
         currentRound,
         currentUser,

@@ -74,6 +74,11 @@
       "relation": "oneToMany",
       "target": "api::era-condition.era-condition",
       "mappedBy": "specie"
+    },
+    "element": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::element.element"
     }
   }
 }

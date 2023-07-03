@@ -1,5 +1,19 @@
+const getCurrentGames = async currentRound => {
+  return await strapi.entityService.findMany('api::game.game', {
+    fields: ['id'],
+    where: {
+      $and: [
+        {
+          round: currentRound.id,
+        },
+      ],
+    },
+  });
+};
+
 const getCurrentGame = async (user, currentRound) => {
-  return await strapi.db.query('api::game.game').findOne({
+  return await strapi.entityService.findOne('api::game.game', {
+    fields: ['id'],
     where: {
       $and: [
         {
@@ -11,4 +25,4 @@ const getCurrentGame = async (user, currentRound) => {
   });
 };
 
-export default getCurrentGame;
+export { getCurrentGames, getCurrentGame };

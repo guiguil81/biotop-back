@@ -1,5 +1,5 @@
 const createGame = async (user, round) => {
-  return await strapi.db.query('api::game.game').create({
+  return await strapi.entityService.create('api::game.game', {
     data: {
       user: user.id,
       round: round.id,

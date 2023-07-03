@@ -4,7 +4,7 @@
 import getCurrentRound from '../../../../bdd/getters/round';
 import { returnDebugError, returnError } from '../../../../config/error';
 import createGame from '../../../../bdd/create/game';
-import getCurrentGame from '../../../../bdd/getters/game';
+import { getCurrentGame } from '../../../../bdd/getters/game';
 import getBasicSpecies from '../../../../bdd/getters/specie';
 import createGameHaveSpecie from '../../../../bdd/create/gameHaveSpecie';
 

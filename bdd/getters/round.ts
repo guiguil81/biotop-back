@@ -1,5 +1,6 @@
 const getCurrentRound = async () => {
-  return await strapi.db.query('api::round.round').findOne({
+  return await strapi.entityService.findMany('api::round.round', {
+    fields: ['id'],
     where: {
       isActive: true,
     },

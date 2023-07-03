@@ -1,5 +1,6 @@
 const getBasicSpecies = async () => {
-  return await strapi.db.query('api::specie.specie').findMany({
+  return await strapi.entityService.findMany('api::specie.specie', {
+    fields: ['id', 'defaultQty'],
     where: {
       isPrimitive: true,
     },
