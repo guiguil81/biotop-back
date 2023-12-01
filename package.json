@@ -10,12 +10,19 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-graphql": "4.11.3",
-    "@strapi/plugin-i18n": "4.11.3",
-    "@strapi/plugin-users-permissions": "4.11.3",
-    "@strapi/provider-email-sendgrid": "4.11.3",
-    "@strapi/strapi": "4.11.3",
-    "better-sqlite3": "8.4.0"
+    "@strapi/plugin-graphql": "4.15.4",
+    "@strapi/plugin-i18n": "4.15.4",
+    "@strapi/plugin-users-permissions": "4.15.4",
+    "@strapi/provider-email-sendgrid": "4.15.4",
+    "@strapi/strapi": "4.15.4",
+    "better-sqlite3": "8.4.0",
+    "immutable": "^5.0.0-beta.4",
+    "lodash": "4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "strapi-plugin-entity-relationship-chart": "4.14.6",
+    "styled-components": "^5.3.11"
   },
   "author": {
     "name": "A Strapi developer"
@@ -23,28 +30,23 @@
   "strapi": {
     "uuid": "9c0155d3-283e-443c-94ef-7b634a0c84aa"
   },
-  "engines": {
-    "node": ">=14.19.1 <=18.x.x",
-    "npm": ">=6.0.0"
-  },
   "license": "MIT",
   "volta": {
-    "node": "18.16.1",
-    "yarn": "1.22.19"
+    "node": "20.9.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.59.11",
-    "@typescript-eslint/parser": "^5.59.11",
-    "eslint": "^8.42.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-config-standard-with-typescript": "^35.0.0",
-    "eslint-import-resolver-typescript": "^3.5.5",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.7.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2",
-    "prettier": "^2.8.8",
-    "typescript": "^5.1.3"
+    "@typescript-eslint/eslint-plugin": "6.11.0",
+    "@typescript-eslint/parser": "6.11.0",
+    "eslint": "8.53.0",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-config-standard-with-typescript": "39.1.1",
+    "eslint-import-resolver-typescript": "3.6.1",
+    "eslint-plugin-import": "2.29.0",
+    "eslint-plugin-n": "16.3.1",
+    "eslint-plugin-prettier": "5.0.1",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-react": "7.33.2",
+    "prettier": "3.1.0",
+    "typescript": "5.2.2"
   }
 }

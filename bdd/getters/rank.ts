@@ -2,13 +2,13 @@ const getRanksAndMyRank = async (round, user) => {
   const allCurrentGames = await strapi.entityService.findMany(
     'api::game.game',
     {
-      fields: ['id'],
+      fields: [],
       where: {
         round: round.id,
       },
       populate: {
         user: {
-          fields: ['id'],
+          fields: [],
         },
       },
       orderBy: { score: 'desc' },

@@ -1,25 +1,75 @@
-const getCurrentGames = async currentRound => {
+import {
+  GetNonPopulatableKeys,
+  GetValues,
+} from '@strapi/types/dist/types/core/attributes';
+
+export type CurrentRoundType = GetValues<
+  'api::round.round',
+  GetNonPopulatableKeys<'api::round.round'>
+>[];
+
+const getCurrentGames = async (currentRound: CurrentRoundType) => {
+  if (currentRound.length === 0) {
+    return [];
+  }
   return await strapi.entityService.findMany('api::game.game', {
-    fields: ['id'],
+    fields: [],
     where: {
       $and: [
         {
-          round: currentRound.id,
+          round: currentRound[0].id,
         },
       ],
     },
     populate: {
       element: {
-        field: ['id'],
+        fields: [],
       },
       gameHaveSpecies: {
         fields: ['qty'],
         populate: {
           specie: {
-            fields: ['id', 'reproduction', 'eat', 'product', 'dead'],
+            fields: ['reproduction', 'eat', 'product', 'dead'],
             populate: {
               element: {
-                field: ['id'],
+                fields: [],
+              },
+              groupSpecie: {
+                fields: [],
+                populate: {
+                  groupSpeciesRequire: {
+                    fields: [],
+                    populate: {
+                      species: {
+                        fields: [],
+                      },
+                    },
+                  },
+                  groupSpeciesRequiredBy: {
+                    fields: [],
+                    populate: {
+                      species: {
+                        fields: [],
+                      },
+                    },
+                  },
+                  groupSpeciesEat: {
+                    fields: [],
+                    populate: {
+                      species: {
+                        fields: [],
+                      },
+                    },
+                  },
+                  groupSpeciesEatenBy: {
+                    fields: [],
+                    populate: {
+                      species: {
+                        fields: [],
+                      },
+                    },
+                  },
+                },
               },
             },
           },
@@ -30,8 +80,8 @@ const getCurrentGames = async currentRound => {
 };
 
 const getCurrentGame = async (user, currentRound) => {
-  return await strapi.entityService.findOne('api::game.game', {
-    fields: ['id'],
+  return await strapi.entityService.findMany('api::game.game', {
+    fields: [],
     where: {
       $and: [
         {
