@@ -63,6 +63,10 @@
       "relation": "oneToMany",
       "target": "api::era-condition.era-condition",
       "mappedBy": "era"
+    },
+    "level": {
+      "type": "integer",
+      "required": true
     }
   }
 }

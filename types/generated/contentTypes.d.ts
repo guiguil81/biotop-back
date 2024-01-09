@@ -770,6 +770,7 @@ export interface ApiEraEra extends Schema.CollectionType {
       'oneToMany',
       'api::era-condition.era-condition'
     >;
+    level: Attribute.Integer & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::era.era', 'oneToOne', 'admin::user'> &

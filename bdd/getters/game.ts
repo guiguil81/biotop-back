@@ -25,55 +25,8 @@ const getCurrentGames = async (currentRound: CurrentRoundType) => {
       element: {
         fields: [],
       },
-      gameHaveSpecies: {
-        fields: ['qty'],
-        populate: {
-          specie: {
-            fields: ['reproduction', 'eat', 'product', 'dead'],
-            populate: {
-              element: {
-                fields: [],
-              },
-              groupSpecie: {
-                fields: [],
-                populate: {
-                  groupSpeciesRequire: {
-                    fields: [],
-                    populate: {
-                      species: {
-                        fields: [],
-                      },
-                    },
-                  },
-                  groupSpeciesRequiredBy: {
-                    fields: [],
-                    populate: {
-                      species: {
-                        fields: [],
-                      },
-                    },
-                  },
-                  groupSpeciesEat: {
-                    fields: [],
-                    populate: {
-                      species: {
-                        fields: [],
-                      },
-                    },
-                  },
-                  groupSpeciesEatenBy: {
-                    fields: [],
-                    populate: {
-                      species: {
-                        fields: [],
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
+      era: {
+        fields: ['level'],
       },
     },
   });

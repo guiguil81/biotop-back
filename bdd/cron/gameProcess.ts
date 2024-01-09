@@ -10,18 +10,21 @@ import {
   getGroupSpecies,
 } from '../utils/getSpeciesIdForGroup';
 import { SpecieEvolution } from './interface';
+import { getGameHaveSpecies } from '../getters/specie';
 
 export type GameType = GetValues<
   'api::game.game',
-  'element' | 'gameHaveSpecies' | GetNonPopulatableKeys<'api::game.game'>
+  'element' | 'era' | GetNonPopulatableKeys<'api::game.game'>
 >;
 
-const gameProcess = (game: GameType) => {
+const gameProcess = async (game: GameType) => {
   let speciesObject: Map<string, Record<SpecieEvolution>> = Map();
   const gameElementId = game.element.id;
 
+  const gameHaveSpecies = await getGameHaveSpecies(game);
+
   // init all cycle process
-  game.gameHaveSpecies.forEach(gameHaveSpecie => {
+  gameHaveSpecies.forEach(gameHaveSpecie => {
     const gameHaveSpecieId = gameHaveSpecie.id;
     const initSpecieQty = fixNumber(gameHaveSpecie.qty);
 
@@ -91,7 +94,7 @@ const gameProcess = (game: GameType) => {
     });
   });
 
-  // cycle actions A require
+  // cycle A require
   speciesObject = speciesObject.withMutations(map => {
     map.forEach((specie, specieId) => {
       const finalQty = specie.get('finalQty');
@@ -122,7 +125,7 @@ const gameProcess = (game: GameType) => {
     });
   });
 
-  // cycle action update qty
+  // cycle update qty
   speciesObject = speciesObject.withMutations(map => {
     map.forEach((specie, specieId) => {
       const finalQty = specie.get('finalQty');
@@ -135,7 +138,7 @@ const gameProcess = (game: GameType) => {
     });
   });
 
-  // cycle action A element
+  // cycle A element
   speciesObject = speciesObject.withMutations(map => {
     // init willEatBy
     map.forEach((specie, specieId) => {
@@ -205,7 +208,8 @@ const gameProcess = (game: GameType) => {
     });
   });
 
-  // cycle action update qty
+  /*
+  // cycle update qty
   speciesObject = speciesObject.withMutations(map => {
     map.forEach((specie, specieId) => {
       const finalQty = specie.get('finalQty');
@@ -217,6 +221,8 @@ const gameProcess = (game: GameType) => {
       map.setIn([specieId, 'finalQty'], deadDifference);
     });
   });
+
+   */
 
   speciesObject.forEach((specieRecord, specieId) => {
     // console.log(`ID de l'espèce: ${specieId}`);
