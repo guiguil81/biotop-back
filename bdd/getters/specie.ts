@@ -1,7 +1,3 @@
-import {
-  GetNonPopulatableKeys,
-  GetValues,
-} from '@strapi/types/dist/types/core/attributes';
 import { GameType } from '../cron/gameProcess';
 
 const getBasicSpecies = async () => {
@@ -13,7 +9,52 @@ const getBasicSpecies = async () => {
   });
 };
 
-const getGameHaveSpecies = async (game: GameType) => {
+const getBasicGameHaveSpecies = async (game: GameType) => {
+  return await strapi.entityService.findMany(
+    'api::game-have-specie.game-have-specie',
+    {
+      fields: [],
+      where: {
+        $and: [
+          {
+            game: game.id,
+          },
+        ],
+      },
+      populate: {
+        specie: {
+          fields: [],
+        },
+      },
+    },
+  );
+};
+const getGameHaveSpecies = async (game: GameType, gameSpeciesId: number[]) => {
+  const groupSpecies = {
+    fields: [],
+    populate: {
+      species: {
+        filters: {
+          $and: [
+            {
+              id: {
+                $in: gameSpeciesId,
+              },
+            },
+            {
+              era: {
+                level: {
+                  $lte: game.era.level,
+                },
+              },
+            },
+          ],
+        },
+        fields: [],
+      },
+    },
+  };
+
   return await strapi.entityService.findMany(
     'api::game-have-specie.game-have-specie',
     {
@@ -35,66 +76,10 @@ const getGameHaveSpecies = async (game: GameType) => {
             groupSpecie: {
               fields: [],
               populate: {
-                groupSpeciesRequire: {
-                  fields: [],
-                  populate: {
-                    species: {
-                      filters: {
-                        era: {
-                          level: {
-                            $lte: game.era.level,
-                          },
-                        },
-                      },
-                      fields: [],
-                    },
-                  },
-                },
-                groupSpeciesRequiredBy: {
-                  fields: [],
-                  populate: {
-                    species: {
-                      filters: {
-                        era: {
-                          level: {
-                            $lte: game.era.level,
-                          },
-                        },
-                      },
-                      fields: [],
-                    },
-                  },
-                },
-                groupSpeciesEat: {
-                  fields: [],
-                  populate: {
-                    species: {
-                      filters: {
-                        era: {
-                          level: {
-                            $lte: game.era.level,
-                          },
-                        },
-                      },
-                      fields: [],
-                    },
-                  },
-                },
-                groupSpeciesEatenBy: {
-                  fields: [],
-                  populate: {
-                    species: {
-                      filters: {
-                        era: {
-                          level: {
-                            $lte: game.era.level,
-                          },
-                        },
-                      },
-                      fields: [],
-                    },
-                  },
-                },
+                groupSpeciesRequire: groupSpecies,
+                groupSpeciesRequiredBy: groupSpecies,
+                groupSpeciesEat: groupSpecies,
+                groupSpeciesEatenBy: groupSpecies,
               },
             },
           },
@@ -104,4 +89,4 @@ const getGameHaveSpecies = async (game: GameType) => {
   );
 };
 
-export { getBasicSpecies, getGameHaveSpecies };
+export { getBasicSpecies, getBasicGameHaveSpecies, getGameHaveSpecies };

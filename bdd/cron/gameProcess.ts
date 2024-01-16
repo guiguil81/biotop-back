@@ -8,9 +8,10 @@ import productionCoef from './productionCoef';
 import {
   getSpeciesIdForGroup,
   getGroupSpecies,
+  getBasicSpeciesIdFromGameHaveSpecies,
 } from '../utils/getSpeciesIdForGroup';
 import { SpecieEvolution } from './interface';
-import { getGameHaveSpecies } from '../getters/specie';
+import { getBasicGameHaveSpecies, getGameHaveSpecies } from '../getters/specie';
 
 export type GameType = GetValues<
   'api::game.game',
@@ -21,9 +22,14 @@ const gameProcess = async (game: GameType) => {
   let speciesObject: Map<string, Record<SpecieEvolution>> = Map();
   const gameElementId = game.element.id;
 
-  const gameHaveSpecies = await getGameHaveSpecies(game);
+  const basicGameHaveSpeciesId = await getBasicGameHaveSpecies(game);
+  const gameSpeciesId = getBasicSpeciesIdFromGameHaveSpecies(
+    basicGameHaveSpeciesId,
+  );
 
-  // init all cycle process
+  const gameHaveSpecies = await getGameHaveSpecies(game, gameSpeciesId);
+
+  // init all cycle process + cycle reproduction
   gameHaveSpecies.forEach(gameHaveSpecie => {
     const gameHaveSpecieId = gameHaveSpecie.id;
     const initSpecieQty = fixNumber(gameHaveSpecie.qty);
@@ -176,13 +182,17 @@ const gameProcess = async (game: GameType) => {
       });
     });
 
-    // add calculation
+    // add calculation and update qty
     map.forEach((specie, specieId) => {
       const willEatBy = specie.get('willEatBy');
 
       if (willEatBy !== undefined && willEatBy.length !== 0) {
         const finalQty = specie.get('finalQty');
-        const nbEatGroupBy = specie.get('nbEatGroupBy');
+        let nbEatGroupBy = specie.get('nbEatGroupBy');
+
+        if (nbEatGroupBy === undefined) {
+          nbEatGroupBy = 0;
+        }
 
         const requireDifference = finalQty - nbEatGroupBy;
 

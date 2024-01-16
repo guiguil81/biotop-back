@@ -25,4 +25,18 @@ const getGroupSpecies = (groups): number[] => {
   return groupsId;
 };
 
-export { getSpeciesIdForGroup, getGroupSpecies };
+const getBasicSpeciesIdFromGameHaveSpecies = (groups): number[] => {
+  const speciesId = [];
+
+  groups.forEach(group => {
+    speciesId.push(group.specie.id);
+  });
+
+  return speciesId;
+};
+
+export {
+  getBasicSpeciesIdFromGameHaveSpecies,
+  getSpeciesIdForGroup,
+  getGroupSpecies,
+};
