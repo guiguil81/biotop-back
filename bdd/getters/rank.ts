@@ -3,7 +3,7 @@ const getRanksAndMyRank = async (round, user) => {
     'api::game.game',
     {
       fields: [],
-      where: {
+      filters: {
         round: round.id,
       },
       populate: {

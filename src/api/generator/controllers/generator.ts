@@ -9,11 +9,11 @@ import { getBasicSpecies } from '../../../../bdd/getters/specie';
 import createGameHaveSpecie from '../../../../bdd/create/gameHaveSpecie';
 
 export default {
-  generateGame: async (ctx, next) => {
+  generateGame: async ctx => {
     try {
       const currentRound = await getCurrentRound();
 
-      if (currentRound === null) {
+      if (currentRound.length === 0) {
         returnError(ctx);
         return null;
       }
@@ -27,7 +27,9 @@ export default {
 
       const userHaveGame = await getCurrentGame(currentUser, currentRound);
 
-      if (userHaveGame !== null) {
+      console.log('userHaveGame', userHaveGame);
+
+      if (userHaveGame.length !== 0) {
         returnError(ctx);
         return null;
       }

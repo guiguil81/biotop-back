@@ -13,8 +13,8 @@ const getCurrentGames = async (currentRound: CurrentRoundType) => {
     return [];
   }
   return await strapi.entityService.findMany('api::game.game', {
-    fields: [],
-    where: {
+    fields: ['ev'],
+    filters: {
       $and: [
         {
           round: currentRound[0].id,
@@ -26,19 +26,22 @@ const getCurrentGames = async (currentRound: CurrentRoundType) => {
         fields: [],
       },
       era: {
-        fields: ['level'],
+        fields: ['level', 'evByCycle', 'evMax'],
       },
     },
   });
 };
 
 const getCurrentGame = async (user, currentRound) => {
+  console.log('currentRound[0].id', currentRound[0].id, user.id);
   return await strapi.entityService.findMany('api::game.game', {
     fields: [],
-    where: {
+    filters: {
       $and: [
         {
-          round: currentRound.id,
+          round: currentRound[0].id,
+        },
+        {
           user: user.id,
         },
       ],

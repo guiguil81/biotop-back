@@ -3,7 +3,7 @@ import { GameType } from '../cron/gameProcess';
 const getBasicSpecies = async () => {
   return await strapi.entityService.findMany('api::specie.specie', {
     fields: ['defaultQty'],
-    where: {
+    filters: {
       isPrimitive: true,
     },
   });
@@ -14,7 +14,7 @@ const getBasicGameHaveSpecies = async (game: GameType) => {
     'api::game-have-specie.game-have-specie',
     {
       fields: [],
-      where: {
+      filters: {
         $and: [
           {
             game: game.id,
@@ -59,7 +59,7 @@ const getGameHaveSpecies = async (game: GameType, gameSpeciesId: number[]) => {
     'api::game-have-specie.game-have-specie',
     {
       fields: ['qty'],
-      where: {
+      filters: {
         $and: [
           {
             game: game.id,
@@ -70,6 +70,9 @@ const getGameHaveSpecies = async (game: GameType, gameSpeciesId: number[]) => {
         specie: {
           fields: ['reproduction', 'eat', 'product', 'dead'],
           populate: {
+            era: {
+              fields: ['speciesFoundScore', 'specieMaxScore'],
+            },
             element: {
               fields: [],
             },
@@ -80,6 +83,12 @@ const getGameHaveSpecies = async (game: GameType, gameSpeciesId: number[]) => {
                 groupSpeciesRequiredBy: groupSpecies,
                 groupSpeciesEat: groupSpecies,
                 groupSpeciesEatenBy: groupSpecies,
+                groupSpeciesUse: groupSpecies,
+                groupSpeciesUsedBy: groupSpecies,
+                groupSpeciesProduce: groupSpecies,
+                groupSpeciesProducedBy: groupSpecies,
+                groupSpeciesProduceByDead: groupSpecies,
+                groupSpeciesProducedByDeadBy: groupSpecies,
               },
             },
           },

@@ -18,6 +18,14 @@ interface SpecieEvolution {
   nbEatGroupBy: number;
   willEatBy: { specieId: string; qtyEat: number }[];
   deadByEat: number;
+  useGroupSpecies: number[];
+  usedGroupSpeciesBy: number[];
+  productGroupSpecies: number[];
+  producedGroupSpeciesBy: number[];
+  produceByDeadGroupSpecies: number[];
+  produceByDeadGroupSpeciesBy: number[];
+  speciesFoundScore: number;
+  specieMaxScore: number;
 }
 
 export { SpecieEvolution };

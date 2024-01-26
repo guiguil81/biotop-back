@@ -1,8 +1,10 @@
+import limitedNumber from './limitedNumber';
+
 const fixNumber = (number: number | string) => {
   if (typeof number === 'string') {
-    return Math.round(parseInt(number, 10));
+    return limitedNumber(Math.round(parseInt(number, 10)));
   }
-  return Math.round(number);
+  return limitedNumber(Math.round(number));
 };
 
 export default fixNumber;
