@@ -17,7 +17,9 @@ const getCurrentGames = async (currentRound: CurrentRoundType) => {
     filters: {
       $and: [
         {
-          round: currentRound[0].id,
+          round: {
+            id: currentRound[0].id,
+          },
         },
       ],
     },

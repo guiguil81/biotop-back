@@ -10,18 +10,17 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@strapi/plugin-graphql": "4.15.4",
-    "@strapi/plugin-i18n": "4.15.4",
-    "@strapi/plugin-users-permissions": "4.15.4",
-    "@strapi/provider-email-sendgrid": "4.15.4",
-    "@strapi/strapi": "4.15.4",
-    "better-sqlite3": "8.4.0",
-    "immutable": "^5.0.0-beta.4",
+    "@strapi/plugin-graphql": "4.19.1",
+    "@strapi/plugin-i18n": "4.19.1",
+    "@strapi/plugin-users-permissions": "4.19.1",
+    "@strapi/provider-email-sendgrid": "4.19.1",
+    "@strapi/strapi": "4.19.1",
+    "better-sqlite3": "9.3.0",
+    "immutable": "5.0.0-beta.5",
     "lodash": "4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^5.3.4",
-    "strapi-plugin-entity-relationship-chart": "4.14.6",
     "styled-components": "^5.3.11"
   },
   "author": {
@@ -32,12 +31,12 @@
   },
   "license": "MIT",
   "volta": {
-    "node": "20.9.0"
+    "node": "20.11.0"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "6.11.0",
-    "@typescript-eslint/parser": "6.11.0",
-    "eslint": "8.53.0",
+    "@typescript-eslint/eslint-plugin": "6.20.0",
+    "@typescript-eslint/parser": "6.20.0",
+    "eslint": "8.56.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-config-standard-with-typescript": "39.1.1",
     "eslint-import-resolver-typescript": "3.6.1",

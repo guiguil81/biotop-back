@@ -17,7 +17,9 @@ const getBasicGameHaveSpecies = async (game: GameType) => {
       filters: {
         $and: [
           {
-            game: game.id,
+            game: {
+              id: game.id,
+            },
           },
         ],
       },
@@ -60,11 +62,9 @@ const getGameHaveSpecies = async (game: GameType, gameSpeciesId: number[]) => {
     {
       fields: ['qty'],
       filters: {
-        $and: [
-          {
-            game: game.id,
-          },
-        ],
+        game: {
+          id: game.id,
+        },
       },
       populate: {
         specie: {
