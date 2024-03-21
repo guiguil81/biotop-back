@@ -69,16 +69,16 @@
       "target": "api::species-mutation.species-mutation",
       "mappedBy": "species"
     },
-    "eraConditions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::era-condition.era-condition",
-      "mappedBy": "specie"
-    },
     "element": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::element.element"
+    },
+    "eraSpecieConditions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::era-specie-condition.era-specie-condition",
+      "mappedBy": "specie"
     }
   }
 }

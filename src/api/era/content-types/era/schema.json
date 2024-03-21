@@ -58,15 +58,15 @@
       "target": "api::specie.specie",
       "mappedBy": "era"
     },
-    "eraConditions": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::era-condition.era-condition",
-      "mappedBy": "era"
-    },
     "level": {
       "type": "integer",
       "required": true
+    },
+    "eraSpecieConditions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::era-specie-condition.era-specie-condition",
+      "mappedBy": "era"
     }
   }
 }

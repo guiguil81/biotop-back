@@ -869,12 +869,12 @@ export interface ApiEraEra extends Schema.CollectionType {
       'oneToMany',
       'api::specie.specie'
     >;
-    eraConditions: Attribute.Relation<
+    level: Attribute.Integer & Attribute.Required;
+    eraSpecieConditions: Attribute.Relation<
       'api::era.era',
       'oneToMany',
-      'api::era-condition.era-condition'
+      'api::era-specie-condition.era-specie-condition'
     >;
-    level: Attribute.Integer & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::era.era', 'oneToOne', 'admin::user'> &
@@ -884,40 +884,42 @@ export interface ApiEraEra extends Schema.CollectionType {
   };
 }
 
-export interface ApiEraConditionEraCondition extends Schema.CollectionType {
-  collectionName: 'era_conditions';
+export interface ApiEraSpecieConditionEraSpecieCondition
+  extends Schema.CollectionType {
+  collectionName: 'era_specie_conditions';
   info: {
-    singularName: 'era-condition';
-    pluralName: 'era-conditions';
-    displayName: 'EraCondition';
+    singularName: 'era-specie-condition';
+    pluralName: 'era-specie-conditions';
+    displayName: 'EraSpecieCondition';
     description: '';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     qtyNeeded: Attribute.BigInteger & Attribute.Required;
     isGreaterThen: Attribute.Boolean & Attribute.Required;
     specie: Attribute.Relation<
-      'api::era-condition.era-condition',
+      'api::era-specie-condition.era-specie-condition',
       'manyToOne',
       'api::specie.specie'
     >;
     era: Attribute.Relation<
-      'api::era-condition.era-condition',
+      'api::era-specie-condition.era-specie-condition',
       'manyToOne',
       'api::era.era'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::era-condition.era-condition',
+      'api::era-specie-condition.era-specie-condition',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::era-condition.era-condition',
+      'api::era-specie-condition.era-specie-condition',
       'oneToOne',
       'admin::user'
     > &
@@ -1215,15 +1217,15 @@ export interface ApiSpecieSpecie extends Schema.CollectionType {
       'oneToMany',
       'api::species-mutation.species-mutation'
     >;
-    eraConditions: Attribute.Relation<
-      'api::specie.specie',
-      'oneToMany',
-      'api::era-condition.era-condition'
-    >;
     element: Attribute.Relation<
       'api::specie.specie',
       'oneToOne',
       'api::element.element'
+    >;
+    eraSpecieConditions: Attribute.Relation<
+      'api::specie.specie',
+      'oneToMany',
+      'api::era-specie-condition.era-specie-condition'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1299,7 +1301,7 @@ declare module '@strapi/types' {
       'api::element.element': ApiElementElement;
       'api::eon.eon': ApiEonEon;
       'api::era.era': ApiEraEra;
-      'api::era-condition.era-condition': ApiEraConditionEraCondition;
+      'api::era-specie-condition.era-specie-condition': ApiEraSpecieConditionEraSpecieCondition;
       'api::game.game': ApiGameGame;
       'api::game-have-specie.game-have-specie': ApiGameHaveSpecieGameHaveSpecie;
       'api::group-specie.group-specie': ApiGroupSpecieGroupSpecie;
